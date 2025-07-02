@@ -8,7 +8,8 @@ type Props = {
 
 const NotesPage = async ({ params }: Props) => {
   const { slug } = await params;
-  const tag = slug?.[0] === "All" ? undefined : slug?.[0];
+  const first = slug?.[0];
+  const tag = first === "All" || !first ? undefined : first;
 
   try {
     const notes = await fetchNotes({ page: 1, tag });
@@ -19,3 +20,4 @@ const NotesPage = async ({ params }: Props) => {
 };
 
 export default NotesPage;
+

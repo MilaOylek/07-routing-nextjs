@@ -8,17 +8,18 @@ import NoteDetailsClient from "./NoteDetails.client";
 
 type Params = { id: string };
 
-export default async function NoteDetailsPage({
+export default async function Page({
   params,
 }: {
   params: Promise<Params>;
 }) {
-  const resolvedParams = await params;
-  const noteId = parseInt(resolvedParams.id, 10);
-  if (isNaN(noteId)) throw new Error("Invalid note ID");
+  const { id } = await params;
+  const noteId = parseInt(id, 10);
+  if (isNaN(noteId)) {
+    throw new Error("Invalid note ID");
+  }
 
   const queryClient = new QueryClient();
-
   await queryClient.prefetchQuery({
     queryKey: ["note", noteId],
     queryFn: () => fetchNoteById(noteId),

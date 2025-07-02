@@ -1,7 +1,7 @@
 import css from "./SidebarNotes.module.css";
 import Link from "next/link";
 
-const categories = ["All", "Work", "Personal", "Meeting", "Shopping", "Todo"];
+const categories = ["All", "Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 const SidebarNotes = async () => {
   return (

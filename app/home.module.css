@@ -1,6 +1,10 @@
 .main {
   flex: 1;
 }
+.containerWrapper {
+  padding: 2rem 0;
+  flex: 1; 
+}
 
 .container {
   width: 90%;

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import css from "./TagsMenu.module.css";
 
-const tags = ["All", "Work", "Personal", "Meeting", "Shopping", "Todo"];
+const tags = ["All", "Todo", "Work", "Personal", "Meeting", "Shopping"];
 
 export default function TagsMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,11 +25,11 @@ export default function TagsMenu() {
           {tags.map((tag) => (
             <li key={tag} className={css.menuItem}>
               <Link
-                href={tag === "All" ? "/notes/filter" : `/notes/filter/${tag}`}
+                href={ `/notes/filter/${tag}`}
                 onClick={toggleMenu}
                 className={css.menuLink}
               >
-                {tag === "All" ? "All Notes" : tag}
+                {tag}
               </Link>
             </li>
           ))}
