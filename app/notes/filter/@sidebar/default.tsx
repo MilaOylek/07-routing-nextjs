@@ -1,14 +1,23 @@
 import css from "./SidebarNotes.module.css";
 import Link from "next/link";
 
-const categories = ["All", "Todo", "Work", "Personal", "Meeting", "Shopping"];
+export const NOTE_CATEGORIES = [
+  "All",
+  "Todo",
+  "Work",
+  "Personal",
+  "Meeting",
+  "Shopping",
+] as const;
 
-const SidebarNotes = async () => {
+export type NoteCategory = (typeof NOTE_CATEGORIES)[number];
+
+const SidebarNotes: React.FC = () => {
   return (
     <ul className={css.menuList}>
-      {categories.map((tag) => (
+      {NOTE_CATEGORIES.map((tag) => (
         <li key={tag} className={css.menuItem}>
-           <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
+          <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
             {tag}
           </Link>
         </li>

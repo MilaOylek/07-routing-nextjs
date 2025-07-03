@@ -24,6 +24,7 @@ export default function NotePreview({ id }: NotePreviewProps) {
     queryFn: () => fetchNoteById(id),
     enabled: !isNaN(id),
     staleTime: 5 * 60 * 1000,
+    refetchOnMount: false, 
   });
 
   const handleClose = () => {

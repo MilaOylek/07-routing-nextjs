@@ -29,13 +29,13 @@ export default function Notes({ initialData, tag }: NotesClientProps) {
     setPage(1);
   }, [debouncedQuery]);
 
-  const [isModal, setIsModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreateNote = () => {
-    setIsModal(true);
+    setIsModalOpen(true);
   };
   const closeModal = () => {
-    setIsModal(false);
+    setIsModalOpen(false);
   };
 
   const { data, isError, isLoading, isFetching, error } = useQuery({
@@ -46,8 +46,8 @@ export default function Notes({ initialData, tag }: NotesClientProps) {
     refetchOnMount: false,
     staleTime: 5 * 60 * 1000,
   });
-  const handlePageChange = useCallback((page: number) => {
-    setPage(page);
+  const handlePageChange = useCallback((pageNumber: number) => {
+    setPage(pageNumber);
   }, []);
 
   const totalPages = data
@@ -70,7 +70,7 @@ export default function Notes({ initialData, tag }: NotesClientProps) {
         </button>
       </header>
 
-      {isModal && (
+      {isModalOpen && (
         <Modal onClose={closeModal}>
           <NoteForm onClose={closeModal} />
         </Modal>
@@ -79,11 +79,11 @@ export default function Notes({ initialData, tag }: NotesClientProps) {
       {(isLoading || isFetching) && <LoadingSpinner />}
 
       {isError && <ErrorMessage message={error?.message || "Unknown error"} />}
-      {!isError && data?.notes?.length === 0 && (
+       {!isError && data?.notes && data.notes.length === 0 && (
         <ErrorMessage message="No notes found." />
       )}
 
-      {data?.notes && <NoteList notes={data.notes} />}
+      {data?.notes && data.notes.length > 0 && <NoteList notes={data.notes} />}
     </div>
   );
 }
